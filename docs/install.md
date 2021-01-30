@@ -37,13 +37,16 @@ If your device does **NOT** have boot ramdisk, you need a copy of the `recovery.
 
 You should be able to extract the file you need from official firmware packages or your custom ROM zip (if using one). If you are still having trouble, go to [XDA-Developers](https://forum.xda-developers.com/) and look for resources, guides, discussions, or ask for help in your device's forum.
 
-- Copy the boot/recovery image to your device
-- Press the **Install** button in the Magisk card
+- Use adb to push the boot/recovery image from your pc to your device. This method preserves the file from corruption, which may happen if you copy and paste, or drag and drop from your pc to the device-directory path.
+      ADB push <filepath>/recovery.img /sdcard/Download
+- On your android device, Press the **Install** button in the Magisk card
 - If you are patching a recovery image, make sure **"Recovery Mode"** is checked in options.<br>In most cases it should already be automatically checked.
 - Choose **"Select and Patch a File"** in method, and select the stock boot/recovery image
-- Magisk Manager will patch the image to `[Internal Storage]/Download/magisk_patched.img`.
+- Magisk Manager will patch the image to `[Internal Storage]/Download/magisk_patched.img`. 
 - Copy the patched image to your PC with ADB:<br>
 `adb pull /sdcard/Download/magisk_patched.img`
+       (Don't be confused by your PC's linked-names for your android device storage.<br> Windows' [Internal Shared Storage] directory is the /sdcard directory on your android device
+- rename the magisk_patched.img file to recovery.img
 - Flash the patched boot/recovery image to your device.<br>
 For most devices, reboot into fastboot mode and flash with command:<br>
 `fastboot flash boot /path/to/magisk_patched.img` or <br>
